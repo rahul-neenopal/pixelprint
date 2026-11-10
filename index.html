@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src &#39;self&#39;; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; img-src &#39;self&#39; data: blob:; font-src &#39;self&#39; data:; connect-src &#39;self&#39; data: blob:; worker-src &#39;self&#39; blob:; object-src &#39;none&#39;; base-uri &#39;self&#39;; form-action &#39;none&#39;">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PixelPrint</title>
+    <!-- Official Tableau Extensions API library (v1.17.0), must load before our code -->
+    <script src="./lib/tableau.extensions.1.latest.min.js"></script>
+    <script type="module" crossorigin src="./assets/main-Cu5Sw82U.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/icons-nTpuPuH7.js">
+    <link rel="stylesheet" crossorigin href="./assets/icons-B2pPw4n0.css">
+  </head>
+  <body class="panel" data-size="full">
+    <header class="topbar">
+      <span class="brand" id="brand"><span class="brand-name">PixelPrint</span></span>
+      <span id="status" class="status busy" role="status" aria-live="polite">Connecting to Tableau…</span>
+      <div class="actions">
+        <div class="split">
+          <button id="export-main" type="button" class="primary" disabled>Export PDF</button>
+          <button id="export-more" type="button" class="primary split-more" aria-haspopup="menu" aria-expanded="false" aria-controls="export-menu" aria-label="Choose an export format" disabled></button>
+          <div id="export-menu" class="menu" role="menu" aria-label="Export formats" hidden></div>
+        </div>
+        <button id="configure" type="button" class="ghost icon-only" aria-label="Configure the report" title="Configure the report" hidden></button>
+        <button id="refresh" type="button" class="ghost icon-only" aria-label="Refresh from the dashboard" title="Refresh from the dashboard" disabled></button>
+      </div>
+    </header>
+
+    <div id="progress" class="progress" hidden>
+      <span class="elapsed" id="progress-elapsed"></span>
+      <span id="progress-text"></span>
+      <div class="track"></div>
+    </div>
+
+    <main class="panel-body">
+      <p id="report-line" class="report-line"></p>
+      <p id="report-sub" class="report-sub"></p>
+
+      <section id="compat" class="compat" hidden>
+        <h2>Template check</h2>
+        <ul id="compat-list" class="log"></ul>
+        <p id="compat-hint" class="hint"></p>
+      </section>
+
+      <section>
+        <h2>Sheets in the report</h2>
+        <div id="sheets" class="sheet-list"></div>
+      </section>
+
+      <section>
+        <h2>Page</h2>
+        <div class="page-options">
+          <label>Size
+            <select id="page-size">
+              <option value="A4" selected>A4</option>
+              <option value="LETTER">Letter</option>
+              <option value="LEGAL">Legal</option>
+            </select>
+          </label>
+          <label>Orientation
+            <select id="orientation">
+              <option value="auto" selected>Automatic</option>
+              <option value="portrait">Portrait</option>
+              <option value="landscape">Landscape</option>
+            </select>
+          </label>
+          <span class="muted">PDF and Word. Changes here apply to your exports only.</span>
+        </div>
+      </section>
+
+      <section id="filters-block">
+        <h2>Filters on this dashboard</h2>
+        <table id="filters" class="kv"></table>
+        <h2>Parameters</h2>
+        <table id="parameters" class="kv"></table>
+        <p id="updated" class="hint"></p>
+      </section>
+
+      <details id="details" class="details" hidden>
+        <summary>Details</summary>
+        <h3>Environment</h3>
+        <dl id="env" class="grid"></dl>
+        <div id="chart-lab-block">
+          <h3>Chart lab (Phase 5c probe)</h3>
+          <p class="hint">Tries Tableau's own chart engine with sample charts, then downloads a probe PDF and a log.</p>
+          <button id="chart-lab-run" type="button" class="small" disabled>Run chart tests</button>
+          <div id="chart-lab-out"></div>
+        </div>
+        <h3>Log</h3>
+        <ol id="log" class="log"></ol>
+      </details>
+    </main>
+
+    <div id="toasts" class="toasts"></div>
+
+  </body>
+</html>
