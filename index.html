@@ -8,9 +8,9 @@
     <title>PixelPrint</title>
     <!-- Official Tableau Extensions API library (v1.17.0), must load before our code -->
     <script src="./lib/tableau.extensions.1.latest.min.js"></script>
-    <script type="module" crossorigin src="./assets/main-RpA0QEOr.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/icons-BFnWa2qX.js">
-    <link rel="stylesheet" crossorigin href="./assets/icons-B2pPw4n0.css">
+    <script type="module" crossorigin src="./assets/main-D8pG5pWg.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/icons-BXtLCHJ3.js">
+    <link rel="stylesheet" crossorigin href="./assets/icons-BJ75GZRo.css">
   </head>
   <body class="panel" data-size="full">
     <header class="topbar">
@@ -82,8 +82,11 @@
         <h3>Environment</h3>
         <dl id="env" class="grid"></dl>
         <div id="chart-lab-block">
+          <h3>Sheet specs (Phase 5c)</h3>
+          <p class="hint">Saves what Tableau says about each sheet's design (Rows, Columns, Marks cards) as a JSON file. Changes nothing.</p>
+          <button id="specs-download" type="button" class="small" disabled>Download sheet specs (JSON)</button>
           <h3>Chart lab (Phase 5c probe)</h3>
-          <p class="hint">Tries Tableau's own chart engine with sample charts, then downloads a probe PDF and a log.</p>
+          <p class="hint">Developer tool: tries Tableau's own chart engine with sample charts, then downloads a probe PDF and a log. Reports don't use it.</p>
           <button id="chart-lab-run" type="button" class="small" disabled>Run chart tests</button>
           <div id="chart-lab-out"></div>
         </div>
