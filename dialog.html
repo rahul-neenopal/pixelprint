@@ -7,17 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PixelPrint · Configure</title>
     <script src="./lib/tableau.extensions.1.latest.min.js"></script>
-    <script type="module" crossorigin src="./assets/dialog-DRAwAvzR.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/icons-BXtLCHJ3.js">
-    <link rel="modulepreload" crossorigin href="./assets/model-DuAKrFor.js">
+    <script type="module" crossorigin src="./assets/dialog-CQPjwjuO.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/icons-DErGUg6u.js">
+    <link rel="modulepreload" crossorigin href="./assets/model-Bs5Gfcpe.js">
     <link rel="modulepreload" crossorigin href="./assets/logo-B5qyUV2Z.js">
-    <link rel="stylesheet" crossorigin href="./assets/icons-BJ75GZRo.css">
+    <link rel="stylesheet" crossorigin href="./assets/icons-BJ6DpzIz.css">
   </head>
   <body class="dialog">
     <header class="dialog-head">
       <div class="dialog-title">
         <span class="brand" id="brand"><span class="brand-name">Configure report</span></span>
         <span id="status" class="status busy" role="status" aria-live="polite">Connecting…</span>
+        <!-- 6g: help for the open tab, in a panel on the right (src/configure/help.ts) -->
+        <button id="help-toggle" type="button" class="small ghost help-toggle" aria-expanded="false" aria-controls="help-panel"></button>
       </div>
       <div class="tabs" role="tablist" aria-label="Report settings">
         <button type="button" role="tab" id="tab-report" aria-controls="panel-report" aria-selected="true">Report and pages</button>
@@ -28,10 +30,13 @@
       </div>
     </header>
 
+    <!-- 6g: first use only (a report never saved), until dismissed -->
+    <div id="start-here" class="start-here" hidden></div>
+
     <form id="form" autocomplete="off">
       <!-- 4d: shown above every tab when the template doesn't match the dashboard -->
       <section id="fix-section" class="compat" hidden style="margin: 12px 16px 0">
-        <h2>Fix mapping</h2>
+        <h2 data-help="fix">Fix mapping</h2>
         <p class="hint">The saved report refers to items that are no longer on this dashboard (renamed or removed in Tableau). Point each one at its new name to keep its settings, or leave it to be removed. Changes apply on Save; Cancel undoes them.</p>
         <table class="grid-table fix-table" id="fixes"></table>
         <ul id="auto-fixes" class="log"></ul>
@@ -39,14 +44,14 @@
 
       <div class="tab-panel" role="tabpanel" id="panel-report" aria-labelledby="tab-report">
         <p class="tab-intro">What the report calls itself, which extra pages it has, and how the PDF is laid out.</p>
-        <h2>Report</h2>
+        <h2 data-help="report">Report</h2>
         <div class="fields">
           <label>Title <input id="title" type="text" /></label>
           <label>Subtitle <input id="subtitle" type="text" placeholder="Optional, for example: For internal use" /></label>
           <label>Footer text <input id="footer" type="text" placeholder="Optional, for example: Confidential, Neenopal" /></label>
         </div>
 
-        <h2>Pages</h2>
+        <h2 data-help="pages">Pages</h2>
         <div class="fields">
           <label class="inline"><input id="cover-page" type="checkbox" /> Cover page: logo, title, subtitle, note and date (a Cover tab in Excel)</label>
           <label>Cover note (optional, several lines allowed)
@@ -62,7 +67,7 @@
           </label>
         </div>
 
-        <h2>PDF and Word pages</h2>
+        <h2 data-help="page-setup">PDF and Word pages</h2>
         <div class="fields row">
           <label>Page size
             <select id="page-size">
@@ -83,7 +88,7 @@
 
       <div class="tab-panel" role="tabpanel" id="panel-branding" aria-labelledby="tab-branding" hidden>
         <p class="tab-intro">The report's look: your logo, your colour, how negative numbers read, and the table style.</p>
-        <h2>Logo and colour</h2>
+        <h2 data-help="logo-colour">Logo and colour</h2>
         <div class="branding">
           <div class="logo-box">
             <img id="logo-preview" alt="Logo preview" />
@@ -100,12 +105,12 @@
           </div>
         </div>
 
-        <h2>Report preset</h2>
+        <h2 data-help="preset">Report preset</h2>
         <p class="hint">One click sets the table style, numbers, totals, cover page, contents and orientation. Title, sheets, logo and colour stay as they are, and you can still change anything afterwards.</p>
         <div class="presets" id="presets" role="group" aria-label="Report presets"></div>
         <p class="hint preset-state" id="preset-state" aria-live="polite"></p>
 
-        <h2>Numbers</h2>
+        <h2 data-help="numbers">Numbers</h2>
         <div class="fields">
           <label>Negative numbers
             <select id="negatives">
@@ -119,27 +124,28 @@
           <label class="inline"><input id="accounting-totals" type="checkbox" /> Double line under the final total (the grand total, or each group's total when there is none)</label>
         </div>
 
-        <h2>Table style</h2>
+        <h2 data-help="table-style">Table style</h2>
         <div class="themes" id="themes" role="radiogroup" aria-label="Table style"></div>
       </div>
 
       <div class="tab-panel" role="tabpanel" id="panel-sheets" aria-labelledby="tab-sheets" hidden>
         <p class="tab-intro">Ticked sheets go into the report, in this order (drag ⠿ or use ▲▼). Open a sheet's columns to rename, hide, format, group, total or colour them, to show it as cards, or to add a chart.</p>
+        <h2 class="sheets-heading" data-help="sheets">Sheets in the report</h2>
         <table class="grid-table" id="sheets"></table>
       </div>
 
       <div class="tab-panel" role="tabpanel" id="panel-fields" aria-labelledby="tab-fields" hidden>
         <p class="tab-intro">What the report lists under "Filters applied" and "Parameters". Hidden filters still filter the data; they're just not printed.</p>
-        <h2>Filters</h2>
+        <h2 data-help="filters">Filters</h2>
         <table class="grid-table" id="filters"></table>
         <label class="inline"><input id="show-all-filters" type="checkbox" /> Also list filters that are set to "All"</label>
-        <h2>Parameters</h2>
+        <h2 data-help="parameters">Parameters</h2>
         <p class="hint">Tableau returns every parameter in the workbook. Tick only the ones that matter for this report.</p>
         <table class="grid-table" id="parameters"></table>
       </div>
 
       <div class="tab-panel" role="tabpanel" id="panel-proof" aria-labelledby="tab-proof" hidden>
-        <p class="tab-intro">The report's first pages with your current settings and the first rows of each sheet. Nothing is saved until you click Save.</p>
+        <p class="tab-intro" data-help="proof" data-help-label="Proof">The report's first pages with your current settings and the first rows of each sheet. Nothing is saved until you click Save.</p>
         <div class="proof-layout">
           <div>
             <div class="proof-pages" id="proof-pages" role="group" aria-label="Page to show"></div>
@@ -150,6 +156,14 @@
         </div>
       </div>
     </form>
+
+    <aside id="help-panel" class="help-panel" hidden aria-labelledby="help-title">
+      <div class="help-head">
+        <h2 id="help-title">Help</h2>
+        <button id="help-close" type="button" class="ghost icon-only small" aria-label="Close help"></button>
+      </div>
+      <div id="help-body" class="help-body"></div>
+    </aside>
 
     <footer class="dialog-actions">
       <span id="revision" class="hint"></span>

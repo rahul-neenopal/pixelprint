@@ -8,9 +8,9 @@
     <title>PixelPrint</title>
     <!-- Official Tableau Extensions API library (v1.17.0), must load before our code -->
     <script src="./lib/tableau.extensions.1.latest.min.js"></script>
-    <script type="module" crossorigin src="./assets/main-D8pG5pWg.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/icons-BXtLCHJ3.js">
-    <link rel="stylesheet" crossorigin href="./assets/icons-BJ75GZRo.css">
+    <script type="module" crossorigin src="./assets/main-Dx-dA3y6.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/icons-DErGUg6u.js">
+    <link rel="stylesheet" crossorigin href="./assets/icons-BJ6DpzIz.css">
   </head>
   <body class="panel" data-size="full">
     <header class="topbar">
@@ -22,6 +22,8 @@
           <button id="export-more" type="button" class="primary split-more" aria-haspopup="menu" aria-expanded="false" aria-controls="export-menu" aria-label="Choose an export format" disabled></button>
           <div id="export-menu" class="menu" role="menu" aria-label="Export formats" hidden></div>
         </div>
+        <!-- 6g: a short guide to the tool, for everyone (src/ui/guide.ts) -->
+        <button id="help" type="button" class="ghost icon-only" aria-label="How PixelPrint works" title="How PixelPrint works" aria-expanded="false" aria-controls="guide"></button>
         <button id="configure" type="button" class="ghost icon-only" aria-label="Configure the report" title="Configure the report" hidden></button>
         <button id="refresh" type="button" class="ghost icon-only" aria-label="Refresh from the dashboard" title="Refresh from the dashboard" disabled></button>
       </div>
@@ -32,6 +34,14 @@
       <span id="progress-text"></span>
       <div class="track"></div>
     </div>
+
+    <section id="guide" class="guide" hidden aria-labelledby="guide-title">
+      <div class="guide-head">
+        <h2 id="guide-title">How PixelPrint works</h2>
+        <button id="guide-close" type="button" class="ghost icon-only small" aria-label="Close the guide"></button>
+      </div>
+      <div id="guide-body" class="guide-body"></div>
+    </section>
 
     <main class="panel-body">
       <p id="report-line" class="report-line"></p>
